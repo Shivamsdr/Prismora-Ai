@@ -1,21 +1,59 @@
 /**
  * historyService.js — Analysis session history service.
  *
- * Manages local session history via IndexedDB.
- * IndexedDB implementation will be introduced in Phase 5.
+ * Phase 3 upgrade: minimal IndexedDB implementation.
+ * Reads and writes session metadata only — no image data stored.
  *
- * This module defines the service interface now so that
- * components can be wired up against it immediately.
+ * Schema:
+ *   DB:    prismora-research
+ *   Store: sessions
+ *   Key:   sessionId (string)
+ *   Index: createdAt (for sorted queries)
  */
 
+const DB_NAME    = 'prismora-research';
+const DB_VERSION = 1;
+const STORE      = 'sessions';
+
+/* ── Open / initialise the database ───────────────────────── */
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+    req.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(STORE)) {
+        const store = db.createObjectStore(STORE, { keyPath: 'sessionId' });
+        store.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+    };
+
+    req.onsuccess = (event) => resolve(event.target.result);
+    req.onerror   = (event) => reject(event.target.error);
+  });
+}
+
 /**
- * Retrieve all stored analysis sessions.
+ * Retrieve all stored sessions, sorted newest-first.
  *
- * @returns {Promise<Array>} Array of session records
+ * @returns {Promise<Array>}
  */
 export async function getAllSessions() {
-  // TODO (Phase 5): Query IndexedDB 'sessions' object store
-  return [];
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx    = db.transaction(STORE, 'readonly');
+    const store = tx.objectStore(STORE);
+    const index = store.index('createdAt');
+    const req   = index.getAll();
+
+    req.onsuccess = () => {
+      const records = req.result ?? [];
+      // Sort descending (newest first)
+      records.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      resolve(records);
+    };
+    req.onerror = () => reject(req.error);
+  });
 }
 
 /**
@@ -25,19 +63,39 @@ export async function getAllSessions() {
  * @returns {Promise<object|null>}
  */
 export async function getSession(sessionId) {
-  // TODO (Phase 5): Query IndexedDB by sessionId key
-  return null;
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).get(sessionId);
+    req.onsuccess = () => resolve(req.result ?? null);
+    req.onerror   = () => reject(req.error);
+  });
 }
 
 /**
- * Persist a new session record.
+ * Persist a session metadata record.
+ * Does NOT store image data.
  *
- * @param {object} session - Session metadata returned from the analysis service
+ * Expected shape:
+ * {
+ *   sessionId: string,       // unique ID
+ *   modality:  'chest' | 'retina',
+ *   filename:  string,       // original upload filename
+ *   status:    string,       // 'pending' | 'complete' | 'error'
+ *   createdAt: ISO string,
+ * }
+ *
+ * @param {object} session
  * @returns {Promise<void>}
  */
 export async function saveSession(session) {
-  // TODO (Phase 5): Write to IndexedDB 'sessions' object store
-  console.info('[historyService] saveSession — IndexedDB not yet implemented', session);
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(STORE, 'readwrite');
+    const req = tx.objectStore(STORE).put(session);
+    req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
 }
 
 /**
@@ -47,8 +105,13 @@ export async function saveSession(session) {
  * @returns {Promise<void>}
  */
 export async function deleteSession(sessionId) {
-  // TODO (Phase 5): Delete from IndexedDB by sessionId key
-  console.info('[historyService] deleteSession — IndexedDB not yet implemented', sessionId);
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(STORE, 'readwrite');
+    const req = tx.objectStore(STORE).delete(sessionId);
+    req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
 }
 
 /**
@@ -57,8 +120,13 @@ export async function deleteSession(sessionId) {
  * @returns {Promise<void>}
  */
 export async function clearAllSessions() {
-  // TODO (Phase 5): Clear IndexedDB 'sessions' object store
-  console.info('[historyService] clearAllSessions — IndexedDB not yet implemented');
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(STORE, 'readwrite');
+    const req = tx.objectStore(STORE).clear();
+    req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
 }
 
 const historyService = {

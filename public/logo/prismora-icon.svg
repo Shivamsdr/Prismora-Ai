@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- PRISMORA AI — icon placeholder (prism / light refraction motif) -->
+  <rect width="48" height="48" rx="10" fill="#0d9488"/>
+  <!-- Prism triangle -->
+  <polygon points="24,8 40,36 8,36" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Light refraction lines -->
+  <line x1="8" y1="36" x2="2" y2="42" stroke="#5eead4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="40" y1="36" x2="45" y2="40" stroke="#99f6e4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="40" y1="36" x2="46" y2="34" stroke="#ccfbf1" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

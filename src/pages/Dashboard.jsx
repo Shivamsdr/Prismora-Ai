@@ -183,7 +183,7 @@ function ModalityPanel({
 }) {
   return (
     <article
-      className="flex flex-col gap-0 transition-base"
+      className="flex flex-col gap-0 h-full transition-base"
       style={{
         background: 'var(--color-surface)',
         border: '1px solid var(--color-border)',
@@ -205,7 +205,7 @@ function ModalityPanel({
       </div>
 
       {/* Content */}
-      <div className="flex flex-col gap-4 p-5">
+      <div className="flex flex-col flex-1 gap-4 p-5">
         {/* Header row */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -381,7 +381,7 @@ function ModalityPanel({
         {/* CTA */}
         <Link
           to={to}
-          className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-white transition-base"
+          className="w-full flex items-center justify-center gap-2 py-2.5 mt-auto text-sm font-semibold text-white transition-base"
           style={{
             background: 'var(--color-primary)',
             borderRadius: 'var(--radius-md)',

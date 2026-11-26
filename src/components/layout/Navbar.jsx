@@ -58,7 +58,7 @@ export default function Navbar() {
         'fixed top-0 left-0 right-0 z-sticky',
         'transition-all duration-slow',
         scrolled
-          ? 'bg-white/95 backdrop-blur-sm border-b border-neutral-200 shadow-xs'
+          ? 'bg-white border-b border-neutral-200 shadow-xs'
           : 'bg-transparent',
       ].join(' ')}
       style={{ height: 'var(--navbar-height)' }}
@@ -141,10 +141,7 @@ export default function Navbar() {
 
       {/* ── Mobile menu ───────────────────────────────────────── */}
       {menuOpen && (
-        <div
-          className="md:hidden border-t border-neutral-200 bg-white/97 backdrop-blur-sm"
-          style={{ backdropFilter: 'blur(8px)' }}
-        >
+        <div className="md:hidden border-t border-neutral-200 bg-white shadow-md">
           <nav className="content-width py-4 flex flex-col gap-1" style={{ maxWidth: '1200px' }}>
             {NAV_LINKS.map(({ label, to }) => (
               <Link

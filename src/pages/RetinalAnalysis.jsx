@@ -103,7 +103,7 @@ export default function RetinalAnalysis() {
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-navy-600">
               Retinal Fundus Analysis
             </h1>
-            <p className="text-sm sm:text-base text-neutral-700 max-w-2xl leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-700 max-w-3xl leading-relaxed">
               Upload a retinal fundus photograph to explore AI-assisted diabetic retinopathy severity grading.
             </p>
           </div>
@@ -114,7 +114,7 @@ export default function RetinalAnalysis() {
         {/* ── Main Two-Column Workspace ───────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Left: Upload, Preview & Analyse Controls */}
-          <section aria-label="Retinal fundus upload workflow" className="lg:col-span-7 flex flex-col gap-5">
+          <section aria-label="Retinal fundus upload workflow" className="lg:col-span-8 flex flex-col gap-5">
             <input
               ref={fileInputRef}
               type="file"
@@ -206,7 +206,7 @@ export default function RetinalAnalysis() {
           </section>
 
           {/* Right: Modality Specifications + 5-Grade DR Reference */}
-          <div className="lg:col-span-5 flex flex-col gap-5">
+          <div className="lg:col-span-4 flex flex-col gap-5">
             <ModalitySpecCard
               icon={Eye}
               tag="Retinal Fundus"

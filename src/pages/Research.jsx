@@ -18,7 +18,7 @@ function PageShell({ label, title, description, route }) {
   return (
     <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center gap-4 px-6">
       <span className="label-caps">{route}</span>
-      <h1 className="text-4xl font-bold tracking-tighter text-neutral-900">{title}</h1>
+      <h1 className="text-4xl font-bold tracking-tighter text-neutral-900 text-center">{title}</h1>
       {description && (
         <p className="text-sm text-neutral-500 max-w-sm text-center">{description}</p>
       )}

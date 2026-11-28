@@ -1,4 +1,3 @@
-/** Card with the platform's header-strip pattern (see ModelInformation). */
 export default function PanelCard({ title, tag, children }) {
   return (
     <section className="rounded-xl border border-neutral-200 bg-white shadow-sm overflow-hidden">

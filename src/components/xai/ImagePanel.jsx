@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { ImageOff } from 'lucide-react';
 
-/**
- * Zoomable viewport. Renders `baseUrl`, plus `overlayUrl` on top at `overlayOpacity`.
- * Both layers use object-contain inside the same box so they stay aligned.
- * Zoom enlarges the box inside a scroll container; pan by scrolling.
- */
 export default function ImagePanel({ title, note, baseUrl, overlayUrl, overlayOpacity = 60, zoom, alt, onDimensions }) {
   const [failed, setFailed] = useState(false);
 

@@ -11,13 +11,6 @@ import Research        from '@pages/Research';
 import About           from '@pages/About';
 import ExplainableViewer from '@pages/ExplainableViewer';
 
-/**
- * AppRouter
- *
- * Central routing configuration for PRISMORA AI.
- * No authentication guards in this phase — all routes are publicly accessible.
- * Route protection and role-based access will be introduced in a later phase.
- */
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -43,10 +36,6 @@ export default function AppRouter() {
   );
 }
 
-/**
- * NotFound — inline 404 placeholder.
- * Will be replaced with a full designed page in a later phase.
- */
 function NotFound() {
   return (
     <div

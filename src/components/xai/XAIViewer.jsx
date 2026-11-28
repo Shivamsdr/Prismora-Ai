@@ -8,12 +8,6 @@ import ImageInfoPanel from './ImageInfoPanel';
 import ExplanationPanel from './ExplanationPanel';
 import XAIUnavailable from './XAIUnavailable';
 
-/**
- * XAIViewer — props mirror GradCAMViewer so backend data can be passed straight through:
- * modality ('chest' | 'retina'), originalImageUrl, gradCamUrl, overlayUrl, gradCamAvailable, filename.
- * Overlay view blends originalImageUrl + gradCamUrl client-side (display only) so opacity is adjustable;
- * if gradCamUrl is missing it falls back to the backend-supplied overlayUrl (fixed opacity).
- */
 export default function XAIViewer({ modality = 'chest', originalImageUrl, gradCamUrl, overlayUrl, gradCamAvailable, filename }) {
   const cfg = MODALITIES[modality] ?? MODALITIES.chest;
   const key = MODALITIES[modality] ? modality : 'chest';

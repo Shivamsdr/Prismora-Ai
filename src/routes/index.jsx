@@ -9,6 +9,7 @@ import Results         from '@pages/Results';
 import History         from '@pages/History';
 import Research        from '@pages/Research';
 import About           from '@pages/About';
+import ExplainableViewer from '@pages/ExplainableViewer';
 
 /**
  * AppRouter
@@ -33,6 +34,7 @@ export default function AppRouter() {
         <Route path="/analysis/retina"   element={<RetinalAnalysis />} />
         <Route path="/results"           element={<Results />} />
         <Route path="/history"           element={<History />} />
+        <Route path="/explainability"    element={<ExplainableViewer />} />
 
         {/* ── 404 fallback ──────────────────────────── */}
         <Route path="*"                  element={<NotFound />} />

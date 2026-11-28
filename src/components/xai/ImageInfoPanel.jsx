@@ -1,6 +1,5 @@
 import PanelCard from './PanelCard';
 
-/** Key-value rows in the same style as FileDetails. Only reports what is actually known. */
 export default function ImageInfoPanel({ modalityLabel, filename, dimensions, layers }) {
   const status = (v) => (v ? 'Provided' : 'Not provided');
   const rows = [

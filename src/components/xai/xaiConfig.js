@@ -1,6 +1,3 @@
-// Labels match ResultsHeader ('Chest X-ray' / 'Retinal Fundus').
-// `landmarks` are generic anatomical references for the reader to compare against;
-// they are NOT model output.
 export const MODALITIES = {
   chest: {
     label: 'Chest X-ray',
